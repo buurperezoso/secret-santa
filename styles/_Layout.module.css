@@ -1,0 +1,14 @@
+.santa-container {
+    background-image: url("https://www.secretsantaorganizer.com/build/images/content-container.5838ab5e.png");
+    background-repeat: no-repeat;
+    background-position: top;
+    padding-top: 12.5rem;
+    position: relative;
+}
+
+.santa-logo {
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    cursor: pointer;
+}

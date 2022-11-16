@@ -1,0 +1,16 @@
+.assignee-background {
+    background: url('https://www.secretsantaorganizer.com/build/images/yourgift.9b44c681.png') no-repeat scroll 0 0 transparent;
+    color: #c51426;
+    display: inline-block;
+    font-size: 1.1em;
+    font-weight: 700;
+    line-height: 41px;
+    margin: 0 15px 0 0;
+    min-width: 197px;
+    padding: 22px 10px 10px 87px;
+    text-transform: capitalize;
+}
+
+.capitalized-name {
+    text-transform: capitalize;
+}
