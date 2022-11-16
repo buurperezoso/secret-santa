@@ -15,7 +15,7 @@ const Participant: FC = () => {
         if (hostId && participantId) {
             invoke({ method: 'GET', route: Routes.getParticipant + `?hostId=${hostId}&participantId=${participantId}` });
         }
-    }, [hostId, participantId]);
+    }, [hostId, participantId, invoke]);
 
     useEffect(() => {
         if (response) {

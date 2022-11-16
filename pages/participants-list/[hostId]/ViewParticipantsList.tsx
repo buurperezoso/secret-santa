@@ -18,7 +18,7 @@ const ViewParticipantsList = () => {
         if (hostId) {
             invoke({ method: Method.GET, route: Routes.getParticipantsList + `?hostId=${hostId}` });
         }
-    }, [hostId]);
+    }, [hostId, invoke]);
 
     useEffect(() => {
         if (response) {
@@ -30,7 +30,7 @@ const ViewParticipantsList = () => {
         <Layout>
             <>
                 <h2 className={styles['capitalized-name']}>Hi {response?.hostName}</h2>
-                <p>Here's the list of the participants of your next event!</p>
+                <p>Here&apos;s the list of the participants of your next event!</p>
                 <p>Date: {response?.date && new Date(response?.date).toLocaleDateString()}</p>
                 <p>Location: {response?.location}</p>
                 <div>
