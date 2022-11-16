@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Button, Table } from "react-bootstrap";
 import { Layout } from "../../../components";
 import { Routes } from "../../../constants/routes";
@@ -13,18 +13,14 @@ const ViewParticipantsList = () => {
     const router = useRouter();
     const { hostId } = router.query
     const { invoke, response } = useHttpRequest();
+    const firstRender = useRef(true);
 
     useEffect(() => {
-        if (hostId) {
+        if (hostId && firstRender.current) {
             invoke({ method: Method.GET, route: Routes.getParticipantsList + `?hostId=${hostId}` });
+            firstRender.current = false;
         }
     }, [hostId, invoke]);
-
-    useEffect(() => {
-        if (response) {
-            console.log("response", response);
-        }
-    }, [response]);
 
     return (
         <Layout>

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import { Layout } from "../../../../components";
 import { Routes } from "../../../../constants/routes";
 import useHttpRequest from "../../../../hooks/useHttpRequest";
@@ -7,21 +7,17 @@ import styles from "../../../../styles/_Participant.module.css";
 
 const Participant: FC = () => {
 
+    const firstRender = useRef(true);
     const { invoke, response } = useHttpRequest();
     const router = useRouter();
     const { hostId, participantId } = router.query
 
     useEffect(() => {
-        if (hostId && participantId) {
+        if (hostId && participantId && firstRender.current) {
             invoke({ method: 'GET', route: Routes.getParticipant + `?hostId=${hostId}&participantId=${participantId}` });
+            firstRender.current = false;
         }
     }, [hostId, participantId, invoke]);
-
-    useEffect(() => {
-        if (response) {
-            console.log("response", response);
-        }
-    }, [response]);
 
     return (
         <Layout>
@@ -32,12 +28,16 @@ const Participant: FC = () => {
                 <div>
                     <span className={styles['assignee-background']}>{response?.assignedBuddy}</span>
                 </div>
-                <div className="mt-3">
-                    <h5>Message from host</h5>
-                    <div className="py-2 px-2 border rounded">
-                        <p>{response?.message}</p>
-                    </div>
-                </div>
+                {
+                    response?.message && (
+                        <div className="mt-3">
+                            <h5>Message from host</h5>
+                            <div className="py-2 px-2 border rounded">
+                                <p>{response?.message}</p>
+                            </div>
+                        </div>
+                    )
+                }
             </>
         </Layout>
     )
